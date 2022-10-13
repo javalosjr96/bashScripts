@@ -28,10 +28,12 @@ patcherRevert(){
     if [ $revert == 0 ];then
       echo "No forbidden changes detected"
     else
-      read -p "Forbidden modules have been reverted, create Revert Changes for Patcher commit? (y/n) " ANSWER
+        git status
+        read -p "Forbidden modules have been reverted, create Revert Changes for Patcher commit? (y/n) " ANSWER
         if [ $ANSWER != 'y' ] && [ $ANSWER != 'Y' ]; then
         return
         else
+        git add --all
         git commit -m "Revert Change for Patcher"
   fi
   fi
