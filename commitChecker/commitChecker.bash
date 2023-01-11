@@ -1,12 +1,14 @@
-commitChecker(){
+glist(){
   INFP=()
   NOTINFP=()
-  read -p "Content List from Patcher:" contentList
+
+  fp=$1
+  contentList=$2
   IFS=',' read -r -a commitList <<< "$contentList"
   for commit in "${commitList[@]}"; 
   do 
     commitCheck=""
-    commitCheck=$(git log --grep=$commit --max-count=1 --oneline)
+    commitCheck=$(git log $fp --grep=$commit --oneline)
     if [ -z "$commitCheck" ]
     then
       NOTINFP+=("${commit}")
@@ -31,5 +33,4 @@ commitChecker(){
     do 
       echo  "$commit"
     done
-
 }
